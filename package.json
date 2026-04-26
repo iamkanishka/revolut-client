@@ -1,0 +1,109 @@
+{
+  "name": "revolut-sdk",
+  "version": "1.0.0",
+  "description": "Production-grade TypeScript SDK for the complete Revolut Developer API",
+  "author": "Kanishka",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./merchant": {
+      "import": "./dist/merchant/index.js",
+      "require": "./dist/merchant/index.cjs",
+      "types": "./dist/merchant/index.d.ts"
+    },
+    "./business": {
+      "import": "./dist/business/index.js",
+      "require": "./dist/business/index.cjs",
+      "types": "./dist/business/index.d.ts"
+    },
+    "./openbanking": {
+      "import": "./dist/openbanking/index.js",
+      "require": "./dist/openbanking/index.cjs",
+      "types": "./dist/openbanking/index.d.ts"
+    },
+    "./cryptoramp": {
+      "import": "./dist/cryptoramp/index.js",
+      "require": "./dist/cryptoramp/index.cjs",
+      "types": "./dist/cryptoramp/index.d.ts"
+    },
+    "./cryptoexchange": {
+      "import": "./dist/cryptoexchange/index.js",
+      "require": "./dist/cryptoexchange/index.cjs",
+      "types": "./dist/cryptoexchange/index.d.ts"
+    },
+    "./webhook": {
+      "import": "./dist/webhook/index.js",
+      "require": "./dist/webhook/index.cjs",
+      "types": "./dist/webhook/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "prepublishOnly": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
+    "@vitest/coverage-v8": "^4.1.5",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^9.1.2",
+    "prettier": "^3.8.3",
+    "typescript": "^5.5.0",
+    "vite": "^8.0.10",
+    "vite-plugin-dts": "^4.0.0",
+    "vitest": "^4.1.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "revolut",
+    "revolut-api",
+    "merchant",
+    "payments",
+    "typescript",
+    "sdk",
+    "fintech",
+    "open-banking",
+    "crypto",
+    "webhook",
+    "payment-gateway",
+    "revolut-pay",
+    "subscription",
+    "business-api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamkanishka/revolut-ts.git"
+  },
+  "homepage": "https://github.com/iamkanishka/revolut-ts#readme",
+  "bugs": {
+    "url": "https://github.com/iamkanishka/revolut-ts/issues"
+  },
+  "funding": "https://github.com/sponsors/iamkanishka"
+}
