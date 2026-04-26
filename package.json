@@ -99,11 +99,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iamkanishka/revolut-ts.git"
+    "url": "git+https://github.com/iamkanishka/revolut-client.git"
   },
-  "homepage": "https://github.com/iamkanishka/revolut-ts#readme",
+  "homepage": "https://github.com/iamkanishka/revolut-client#readme",
   "bugs": {
-    "url": "https://github.com/iamkanishka/revolut-ts/issues"
+    "url": "https://github.com/iamkanishka/revolut-client/issues"
   },
   "funding": "https://github.com/sponsors/iamkanishka"
 }
