@@ -1,10 +1,10 @@
 /**
- * revolut-sdk
+ * revolut-client
  * Production-grade TypeScript SDK for the complete Revolut Developer API.
  *
  * @example
  * ```typescript
- * import { RevolutSDK } from "revolut-sdk";
+ * import { RevolutSDK } from "revolut-client";
  *
  * const sdk = new RevolutSDK({
  *   merchantKey: "sk_live_...",
@@ -35,8 +35,8 @@ export * from "./client/index.js";
 export * from "./webhook/index.js";
 
 // API sub-module types — import directly from sub-packages to avoid naming conflicts:
-//   import type { Order } from "revolut-sdk/merchant"
-//   import type { Account } from "revolut-sdk/business"
+//   import type { Order } from "revolut-client/merchant"
+//   import type { Account } from "revolut-client/business"
 // These re-exports use namespace aliases to keep the root barrel clean.
 export type * as MerchantTypes from "./merchant/index.js";
 export type * as BusinessTypes from "./business/index.js";

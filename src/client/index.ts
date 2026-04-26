@@ -334,7 +334,7 @@ export class HttpClient {
     const headers: Record<string, string> = {
       Accept: "application/json",
       Authorization: `Bearer ${this.config.apiKey}`,
-      "User-Agent": this.config.userAgent ?? "revolut-sdk/1.0.0",
+      "User-Agent": this.config.userAgent ?? "revolut-client/1.0.0",
       ...req.headers,
     };
     if (req.body !== undefined) {

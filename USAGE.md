@@ -1,4 +1,4 @@
-# revolut-sdk — Usage Guide
+# revolut-client — Usage Guide
 
 Complete guide for the Revolut TypeScript SDK covering every API, configuration option, error pattern, and advanced feature.
 
@@ -51,11 +51,11 @@ Complete guide for the Revolut TypeScript SDK covering every API, configuration 
 ## 1. Installation
 
 ```bash
-npm install revolut-sdk
+npm install revolut-client
 # or
-yarn add revolut-sdk
+yarn add revolut-client
 # or
-pnpm add revolut-sdk
+pnpm add revolut-client
 ```
 
 **Requirements:** Node.js 18+, TypeScript 5.5+ (for consumers), zero runtime dependencies.
@@ -65,7 +65,7 @@ pnpm add revolut-sdk
 ## 2. Quick Start
 
 ```typescript
-import { RevolutSDK, Amount, Currency } from "revolut-sdk";
+import { RevolutSDK, Amount, Currency } from "revolut-client";
 
 const sdk = new RevolutSDK({
   merchantKey: "sk_live_...",   // Merchant API secret key
@@ -99,7 +99,7 @@ const sdk = new RevolutSDK({
 ### Unified SDK (all APIs)
 
 ```typescript
-import { RevolutSDK } from "revolut-sdk";
+import { RevolutSDK } from "revolut-client";
 
 const sdk = new RevolutSDK({
   // ── API Keys (provide only the ones you use) ───────────────────────────
@@ -142,7 +142,7 @@ const sdk = new RevolutSDK({
 ### Individual clients
 
 ```typescript
-import { MerchantClient, BASE_URLS } from "revolut-sdk/merchant";
+import { MerchantClient, BASE_URLS } from "revolut-client/merchant";
 
 const merchant = new MerchantClient({
   apiKey:      "sk_live_...",
@@ -1182,7 +1182,7 @@ const symbols = await cx.listSymbols();
 ### WebhookHandler (recommended)
 
 ```typescript
-import { WebhookHandler, computeWebhookSignature } from "revolut-sdk/webhook";
+import { WebhookHandler, computeWebhookSignature } from "revolut-client/webhook";
 
 const handler = new WebhookHandler({
   secret:            "wsk_...",     // from Revolut dashboard or rotateWebhookSecret()
@@ -1244,7 +1244,7 @@ Replay window:  5 minutes (enforced when validateTimestamp: true)
 ### Standalone verification (any framework)
 
 ```typescript
-import { verifyWebhookSignature, computeWebhookSignature } from "revolut-sdk/webhook";
+import { verifyWebhookSignature, computeWebhookSignature } from "revolut-client/webhook";
 
 // Verify (async — uses Web Crypto API, works everywhere)
 const isValid = await verifyWebhookSignature({
@@ -1279,7 +1279,7 @@ import {
   isRevolutError,
   APIError,
   ValidationError,
-} from "revolut-sdk";
+} from "revolut-client";
 
 async function safeCreateOrder() {
   try {
@@ -1350,7 +1350,7 @@ RevolutError (abstract)
 All list endpoints return `PageResponse<T>`:
 
 ```typescript
-import { hasNextPage } from "revolut-sdk";
+import { hasNextPage } from "revolut-client";
 
 // ── Manual cursor pagination ──────────────────────────────────────────────
 
@@ -1410,7 +1410,7 @@ const sdk = new RevolutSDK({
 });
 
 // Disable retry for a specific client
-import { withNoRetry } from "revolut-sdk";
+import { withNoRetry } from "revolut-client";
 // (pass retry: { maxAttempts: 1 } in ClientConfig)
 ```
 
@@ -1435,7 +1435,7 @@ const sdk = new RevolutSDK({
 ## 13. Telemetry & Observability
 
 ```typescript
-import type { RequestEvent, ResponseEvent, ErrorEvent } from "revolut-sdk";
+import type { RequestEvent, ResponseEvent, ErrorEvent } from "revolut-client";
 
 const sdk = new RevolutSDK({
   merchantKey: "sk_live_...",
@@ -1479,7 +1479,7 @@ const sdk = new RevolutSDK({
 Prevent accidental type confusion at compile time:
 
 ```typescript
-import { Currency, Amount, UUID, ISODuration } from "revolut-sdk";
+import { Currency, Amount, UUID, ISODuration } from "revolut-client";
 
 // ✅ Correct — use the helper functions to create branded values
 const amount   = Amount(1000);         // Amount (not just number)
@@ -1519,8 +1519,8 @@ handler.on("SUBSCRIPTION_INITIATED", (evt) => {
 ### Generic pagination
 
 ```typescript
-import type { PageResponse } from "revolut-sdk";
-import type { Order } from "revolut-sdk/merchant";
+import type { PageResponse } from "revolut-client";
+import type { Order } from "revolut-client/merchant";
 
 // The generic parameter gives you typed items
 const page: PageResponse<Order> = await sdk.merchant.listOrders();
@@ -1552,30 +1552,30 @@ Import only what you need for better tree-shaking:
 
 ```typescript
 // Full SDK + all types from root
-import { RevolutSDK, Currency, Amount, APIError, isAPIError } from "revolut-sdk";
+import { RevolutSDK, Currency, Amount, APIError, isAPIError } from "revolut-client";
 
 // Merchant API only
-import { MerchantClient } from "revolut-sdk/merchant";
-import type { Order, CreateOrderRequest, Subscription } from "revolut-sdk/merchant";
+import { MerchantClient } from "revolut-client/merchant";
+import type { Order, CreateOrderRequest, Subscription } from "revolut-client/merchant";
 
 // Business API only
-import { BusinessClient } from "revolut-sdk/business";
-import type { Account, Transaction, PayoutLink } from "revolut-sdk/business";
+import { BusinessClient } from "revolut-client/business";
+import type { Account, Transaction, PayoutLink } from "revolut-client/business";
 
 // Open Banking API only
-import { OpenBankingClient } from "revolut-sdk/openbanking";
-import type { OBAccount, OBTransaction } from "revolut-sdk/openbanking";
+import { OpenBankingClient } from "revolut-client/openbanking";
+import type { OBAccount, OBTransaction } from "revolut-client/openbanking";
 
 // Crypto Ramp API only
-import { CryptoRampClient } from "revolut-sdk/cryptoramp";
-import type { RampOrder, Quote } from "revolut-sdk/cryptoramp";
+import { CryptoRampClient } from "revolut-client/cryptoramp";
+import type { RampOrder, Quote } from "revolut-client/cryptoramp";
 
 // Crypto Exchange API only
-import { CryptoExchangeClient } from "revolut-sdk/cryptoexchange";
-import type { Order as ExchangeOrder, Ticker } from "revolut-sdk/cryptoexchange";
+import { CryptoExchangeClient } from "revolut-client/cryptoexchange";
+import type { Order as ExchangeOrder, Ticker } from "revolut-client/cryptoexchange";
 
 // Webhook handler only
-import { WebhookHandler, verifyWebhookSignature } from "revolut-sdk/webhook";
+import { WebhookHandler, verifyWebhookSignature } from "revolut-client/webhook";
 ```
 
 ---
@@ -1586,8 +1586,8 @@ import { WebhookHandler, verifyWebhookSignature } from "revolut-sdk/webhook";
 
 ```typescript
 import express from "express";
-import { WebhookHandler } from "revolut-sdk/webhook";
-import { RevolutSDK, Amount, Currency } from "revolut-sdk";
+import { WebhookHandler } from "revolut-client/webhook";
+import { RevolutSDK, Amount, Currency } from "revolut-client";
 
 const app = express();
 const sdk = new RevolutSDK({ merchantKey: process.env["REVOLUT_SECRET_KEY"]! });
@@ -1634,7 +1634,7 @@ app.post(
 
 ```typescript
 import Fastify from "fastify";
-import { WebhookHandler } from "revolut-sdk/webhook";
+import { WebhookHandler } from "revolut-client/webhook";
 
 const fastify = Fastify();
 
@@ -1671,7 +1671,7 @@ fastify.post("/webhooks/revolut", async (request, reply) => {
 ```typescript
 // app/api/webhooks/revolut/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { WebhookHandler } from "revolut-sdk/webhook";
+import { WebhookHandler } from "revolut-client/webhook";
 
 const handler = new WebhookHandler({
   secret:            process.env["REVOLUT_WEBHOOK_SECRET"]!,
@@ -1700,7 +1700,7 @@ export async function POST(req: NextRequest) {
 ### Cloudflare Workers / Edge Runtime
 
 ```typescript
-import { WebhookHandler, computeHMACAsync } from "revolut-sdk/webhook";
+import { WebhookHandler, computeHMACAsync } from "revolut-client/webhook";
 
 // Use async Web Crypto API — no node:crypto, works on all edge runtimes
 const handler = new WebhookHandler({ secret: REVOLUT_WEBHOOK_SECRET });
@@ -1734,7 +1734,7 @@ export default {
 
 ```typescript
 import { Hono } from "hono";
-import { WebhookHandler } from "revolut-sdk/webhook";
+import { WebhookHandler } from "revolut-client/webhook";
 
 const app = new Hono();
 const handler = new WebhookHandler({ secret: Bun.env["REVOLUT_WEBHOOK_SECRET"]! });

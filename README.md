@@ -1,8 +1,8 @@
-# revolut-sdk
+# revolut-client
 
 Production-grade **TypeScript SDK** for the complete [Revolut Developer API](https://developer.revolut.com) platform.
 
-[![npm](https://img.shields.io/npm/v/revolut-sdk)](https://www.npmjs.com/package/revolut-sdk)
+[![npm](https://img.shields.io/npm/v/revolut-client)](https://www.npmjs.com/package/revolut-client)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5%2B-blue)](https://www.typescriptlang.org)
 [![Tests](https://img.shields.io/badge/tests-148%20passing-brightgreen)](#)
 [![Zero dependencies](https://img.shields.io/badge/deps-zero-brightgreen)](#)
@@ -28,7 +28,7 @@ Production-grade **TypeScript SDK** for the complete [Revolut Developer API](htt
 ## Installation
 
 ```bash
-npm install revolut-sdk
+npm install revolut-client
 ```
 
 ---
@@ -36,7 +36,7 @@ npm install revolut-sdk
 ## Quick start
 
 ```typescript
-import { RevolutSDK, Currency, Amount } from "revolut-sdk";
+import { RevolutSDK, Currency, Amount } from "revolut-client";
 
 const sdk = new RevolutSDK({
   merchantKey:  "sk_live_...",
@@ -73,7 +73,7 @@ const sdk = new RevolutSDK({
 ### Merchant API
 
 ```typescript
-import { MerchantClient, Currency, Amount } from "revolut-sdk/merchant";
+import { MerchantClient, Currency, Amount } from "revolut-client/merchant";
 // or via the unified SDK:
 const m = sdk.merchant;
 
@@ -224,7 +224,7 @@ const failed = await b.getFailedWebhookEvents(wh.id, { limit: 20 });
 ### Webhooks
 
 ```typescript
-import { WebhookHandler, computeWebhookSignature } from "revolut-sdk/webhook";
+import { WebhookHandler, computeWebhookSignature } from "revolut-client/webhook";
 
 const handler = new WebhookHandler({
   secret:            "wsk_...",      // from Revolut dashboard
@@ -270,7 +270,7 @@ Revolut's signature format: `HMAC-SHA256("v1.{Revolut-Request-Timestamp}.{rawBod
 import {
   isAPIError, isValidationError, isNetworkError,
   APIError, ValidationError
-} from "revolut-sdk";
+} from "revolut-client";
 
 try {
   const order = await sdk.merchant.getOrder(orderId);
@@ -299,7 +299,7 @@ try {
 import {
   RevolutSDK,
   withApiKey, withSandbox, withRetry, withRateLimit, withTelemetry, withNoRetry
-} from "revolut-sdk";
+} from "revolut-client";
 
 const sdk = new RevolutSDK({
   merchantKey: "sk_live_...",
@@ -336,7 +336,7 @@ const sdk = new RevolutSDK({
 ## Pagination
 
 ```typescript
-import { hasNextPage } from "revolut-sdk";
+import { hasNextPage } from "revolut-client";
 
 let cursor: string | undefined;
 do {
@@ -354,15 +354,15 @@ do {
 
 ```typescript
 // Full SDK
-import { RevolutSDK } from "revolut-sdk";
+import { RevolutSDK } from "revolut-client";
 
 // Individual client + types
-import { MerchantClient }     from "revolut-sdk/merchant";
-import { BusinessClient }     from "revolut-sdk/business";
-import { OpenBankingClient }  from "revolut-sdk/openbanking";
-import { CryptoRampClient }   from "revolut-sdk/cryptoramp";
-import { CryptoExchangeClient } from "revolut-sdk/cryptoexchange";
-import { WebhookHandler }     from "revolut-sdk/webhook";
+import { MerchantClient }     from "revolut-client/merchant";
+import { BusinessClient }     from "revolut-client/business";
+import { OpenBankingClient }  from "revolut-client/openbanking";
+import { CryptoRampClient }   from "revolut-client/cryptoramp";
+import { CryptoExchangeClient } from "revolut-client/cryptoexchange";
+import { WebhookHandler }     from "revolut-client/webhook";
 ```
 
 ---

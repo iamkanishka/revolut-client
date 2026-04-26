@@ -1,5 +1,5 @@
 {
-  "name": "revolut-sdk",
+  "name": "revolut-client",
   "version": "1.0.0",
   "description": "Production-grade TypeScript SDK for the complete Revolut Developer API",
   "author": "Kanishka",
